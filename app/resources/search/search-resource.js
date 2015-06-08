@@ -15,7 +15,8 @@
 	}
 
 	SearchResource.prototype.query = function(term) {
-		return this.resource.query(term).$promise;
+		var searchObj = {term: term};
+		return this.resource.query(searchObj).$promise;
 	}
 
 })();
