@@ -1,0 +1,19 @@
+.search-result-cntr {
+    border: 1px solid;
+    border-color: #000066;
+    border-left-width: 6px;
+    border-radius: 6px;
+    margin-top: 10px;
+}
+
+.search-result-cntr .field-label {
+    text-align: right;
+}
+
+.search-result-cntr .field {
+    text-align: left;
+}
+
+.search-result-cntr:hover {
+    background-color: #ccc1cb;
+}

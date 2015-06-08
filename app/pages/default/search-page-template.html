@@ -1,0 +1,39 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-6">
+            <input type="text" ng-model="searchTerm" placeholder="Enter search term" size="60">
+            <button class="btn btn-primary" ng-click="search()">Search <span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+    <div ng-if="results != null">
+        <div class="row">
+            <div class="facets col-sm-2"><h4>Narrow your choices</h4></div>
+            <div class="search-results col-sm-6"><h4>We found {{results.length}} results for {{searchTerm}}</h4></div>
+            <div class="facets col-sm-4"><h4></h4></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">Facets placeholder</div>
+            <div class="col-sm-6">
+                <div class="panel-main-height">
+                    <ul class="media-list">
+                        <li class="search-result-cntr" role="alert" ng-repeat="result in results">
+                            <div class="media-body">
+                                <a href="#">
+                                    <div class="col-sm-3 field-label">Name:</div>
+                                    <div class="col-sm-9 field">{{result.firstName}} {{result.lastName}}</div>
+                                    <div class="col-sm-3 field-label">Account #:</div>
+                                    <div class="col-sm-9 field">{{result.accountNum}}</div>
+                                    <div class="col-sm-3 field-label">Account ID:</div>
+                                    <div class="col-sm-9 field">{{result.accountId}}</div>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-4">Additional content placeholder</div>
+        </div>
+    </div>
+</div>

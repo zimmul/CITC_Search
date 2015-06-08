@@ -1,0 +1,26 @@
+{
+  "name": "search-ui",
+  "description": "Search UI app that interacts with REST endpoints",
+  "version": "0.0.0",
+  "homepage": "",
+  "license": "",
+  "private": true,
+  "dependencies": {
+    "angular": "1.3.x",
+    "angular-route": "1.3.x",
+    "angular-resource": "1.3.x",
+    "angular-loader": "1.3.x",
+    "angular-mocks": "~1.3.x",
+    "angular-animate": "*",
+    "angular-bootstrap": "*",
+    "angular-datatables": "0.3.x",
+    "bootstrap": "3.1.1",
+    "jquery": "1.11.x"
+  },
+  "exclude": [
+    "html5-boilerplate"
+  ],
+  "resolutions": {
+    "angular": "1.3.16"
+  }
+}
