@@ -20,7 +20,7 @@
 		};
 
 		$scope.dtOptions = DTOptionsBuilder.newOptions()
-			.withDOM('<"row"<"col-xs-6"<"pull-right"C>><"col-xs-6"<"pull-right"l>>><"row"<"col-xs-12"<"table-responsive"rt>>><"row row-padding"<"col-xs-6"i><"col-xs-6"<"pull-right"p>>>')
+			.withDOM('<"row"<"col-xs-6"<"pull-left"i>><"col-xs-6"<"pull-right"l>>><"row"<"col-xs-12"<"table-responsive"rt>>><"row row-padding"<"col-xs-12"<"pull-right"p>>>')
 			.withPaginationType('full_numbers')
 			.withDisplayLength(10)
 			.withBootstrap()
