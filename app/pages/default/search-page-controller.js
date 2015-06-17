@@ -2,9 +2,9 @@
 	'use strict';
 
 	angular.module('pages.search')
-		.controller('searchPageController', ['$scope', 'searchResource', SearchPageController]);
+		.controller('searchPageController', ['$scope', 'searchResource', 'DTOptionsBuilder', 'DTColumnBuilder', SearchPageController]);
 
-	function SearchPageController($scope, searchResource) {
+	function SearchPageController($scope, searchResource, DTOptionsBuilder, DTColumnBuilder) {
 
 		$scope.searchTerm = null;
 
@@ -18,6 +18,25 @@
 			});
 
 		};
+
+		$scope.dtOptions = DTOptionsBuilder.newOptions()
+			.withDOM('<"row"<"col-xs-6"<"pull-right"C>><"col-xs-6"<"pull-right"l>>><"row"<"col-xs-12"<"table-responsive"rt>>><"row row-padding"<"col-xs-6"i><"col-xs-6"<"pull-right"p>>>')
+			.withPaginationType('full_numbers')
+			.withDisplayLength(10)
+			.withBootstrap()
+			//.withOption('oLanguage', {
+			//	"sSearch": "Search",
+			//	"sShow": "Show",
+			//	"oPaginate": {
+			//		"sFirst": "First",
+			//		"sPrevious": "Previous",
+			//		"sNext": "Next",
+			//		"sLast": "Last"
+			//	},
+			//	"sInfo": "Showing" +" _START_ to _END_ of _TOTAL_ "+ "entries",
+			//	"sLengthMenu":"Show" +" _MENU_ " +"Items Per Page"
+			//})
+		;
 
 		var buildFacetData = function(sourceData) {
 
