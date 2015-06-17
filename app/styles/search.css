@@ -17,3 +17,11 @@
 .search-result-cntr:hover {
     background-color: #ccc1cb;
 }
+
+.facet-item {
+    padding-left: 10px;
+}
+
+.panel-primary {
+    margin-top: 10px;
+}
