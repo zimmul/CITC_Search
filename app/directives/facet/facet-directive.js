@@ -18,14 +18,45 @@
 
 				$scope.choose = function(event, field, value) {
 					refreshChecked(event, field, value);
+
+					if(value.includes('Up To')) {
+						var start = str.indexOf('[') + 2;
+						var end = str.indexOf(']');
+
+						value = parseInt(value.substr(start, end - start));
+					}
+
 					$scope.$emit('facetClick', field, value);
 				};
 
 				$scope.elementId = function(name, id) {
 					var returnStr="";
+
 					returnStr += name.replace(/ /g, '-'); //IDs and Class names should use hyphens as CSS is hyphen-delimited syntax
-					returnStr += '-' + id;
+
+					if(id) {
+						returnStr += '-' + id;
+					}
+
 					return returnStr;
+				};
+
+				$scope.buildFieldDesc = function(str) {
+
+					var start = str.indexOf('[') + 2;
+					var end = str.indexOf(']');
+					var endValue = str.substr(start, end - start);
+					var startValue = parseInt(endValue) - 99;
+
+					return '$' + startValue + ' - ' + '$' + endValue;
+				};
+
+				$scope.getFacetValue = function(str) {
+
+					var start = str.indexOf('[') + 2;
+					var end = str.indexOf(']');
+
+					return str.substr(start, end - start);
 				};
 
 				var refreshChecked = function(event, field, value) {

@@ -42,6 +42,7 @@
 			}
 
 			var facets = [];
+			var pastDueFacets = [];
 			var i = 0, j = sourceData.length;
 			var starterObj = sourceData[0];
 			var facetName = starterObj.fieldName;
@@ -49,18 +50,25 @@
 			for(i; i < j; i++) {
 				var obj = sourceData[i];
 
-				if(obj.fieldName !== facetName) {
+				if(obj.fieldValue.toLowerCase() === 'pastdueamount') {
+					pastDueFacets.push(obj);
+				} else if(obj.fieldName !== facetName) {
 					if(facetArray !== null) {
 						facets.push(facetArray);
 					}
 
 					facetArray = [];
+				} else {
+					if(obj.fieldValue !== 'data' && obj.fieldValue !== 'marketing_campaign') {
+						facetArray.push(sourceData[i]);
+					}
 				}
-				facetArray.push(sourceData[i]);
+
 				facetName = obj.fieldName;
 			}
 
 			facets.push(facetArray);
+			facets.push(pastDueFacets);
 
 			return facets;
 		};
@@ -78,9 +86,19 @@
 			var i= 0, j=originalSearchResults.length;
 			for(i; i < j; i++) {
 				var result = originalSearchResults[i];
-				var resultFacetField = result[facetField].toLowerCase();
-				if(resultFacetField.includes(facetValue.toLowerCase()) ) {
-					newResults.push(result);
+
+				if(facetField.toLowerCase() === 'pastdueamount') {
+					var resultFacetField = parseFloat(result[facetField]);
+					var minValue = parseInt(facetValue) - 99;
+					var maxValue = parseInt(facetValue);
+					if(minValue <= resultFacetField && resultFacetField <= maxValue) {
+						newResults.push(result);
+					}
+				} else {
+					var resultFacetField = result[facetField].toLowerCase();
+					if(resultFacetField.includes(facetValue.toLowerCase()) ) {
+						newResults.push(result);
+					}
 				}
 			}
 
