@@ -1,3 +1,13 @@
+<div class="section citc-banner">
+    <div class="container-fluid">
+        <div class="row row-centered">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10 col-centered pd-20 text-left">
+                <h3>CITC SYSTEMS</h3>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-2"></div>
@@ -10,7 +20,7 @@
     <div ng-if="results != null">
         <div class="row">
             <div class="facets col-sm-2"><h4>Narrow your choices</h4></div>
-            <div class="search-results col-sm-6"></div>
+            <div class="search-results col-sm-6"><h4>We found {{results.length}} results for {{searchTerm}}</h4></div>
             <div class="facets col-sm-4"><h4></h4></div>
         </div>
         <div class="row">
@@ -18,11 +28,11 @@
             <div class="col-sm-6">
                 <table id="resultsTable" datatable="ng" dt-options="dtOptions" role="table"
                        class="row-border table hover table-condensed table-bordered table-striped table-default table-available-items dataTable animated fadeIn">
-                    <thead>
-                    <tr>
-                        <th>We found {{results.length}} results for {{searchTerm}}</th>
-                    </tr>
-                    </thead>
+                    <!--<thead>-->
+                        <!--<tr>-->
+                            <!--<th>We found {{results.length}} results for {{searchTerm}}</th>-->
+                        <!--</tr>-->
+                    <!--</thead>-->
                     <tbody>
                     <tr ng-repeat="result in results">
                         <td>

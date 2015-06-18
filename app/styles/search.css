@@ -1,3 +1,18 @@
+body {
+    font-family: Montserrat, sans-serif;
+}
+
+.citc-banner {
+    height: 100px;
+    background-color: #3498db;
+    border:1px solid #eee;
+    color:#fff;z-index:999;
+}
+
+.citc-banner h3 {
+    margin-top: 37px;
+}
+
 .search-result-cntr {
     border: 1px solid;
     border-color: #000066;

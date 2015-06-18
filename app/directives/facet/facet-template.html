@@ -10,7 +10,7 @@
         <ul class="media-list">
             <li class="facet-item" ng-repeat="item in facets">
                 <div class="facet-detail">
-                    <input type="radio" ng-click="choose(facetTitle, item.fieldValue)"><span> {{item.fieldValue}} ({{item.count}})</span>
+                    <input type="checkbox" id="{{elementId(facetTitle, item.fieldValue)}}" ng-click="choose($event, facetTitle, item.fieldValue)"><span> {{item.fieldValue}} ({{item.count}})</span>
                 </div>
             </li>
         </ul>

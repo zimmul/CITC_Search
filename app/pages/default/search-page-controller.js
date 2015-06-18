@@ -7,6 +7,7 @@
 	function SearchPageController($scope, searchResource, DTOptionsBuilder, DTColumnBuilder) {
 
 		var originalSearchResults = [];
+		var currentFacet = null;
 		$scope.searchTerm = null;
 
 		// "click" function of the search button on the UI
@@ -65,6 +66,12 @@
 		};
 
 		var filterResultsFromFacet = function(facetField, facetValue) {
+			var selectedFacet = facetField +'-' + facetValue;
+			if(currentFacet === selectedFacet) {
+				$scope.results = originalSearchResults;
+				currentFacet = null;
+				return;
+			}
 
 			var newResults = [];
 
@@ -77,6 +84,7 @@
 				}
 			}
 
+			currentFacet = selectedFacet;
 			$scope.results = newResults;
 		}
 	}
