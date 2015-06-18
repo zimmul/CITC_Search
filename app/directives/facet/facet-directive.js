@@ -14,6 +14,10 @@
 			},
 			controller: function($scope) {
 				$scope.facetTitle = $scope.facets[0].fieldName;
+
+				$scope.choose = function(field, value) {
+					$scope.$emit('facetClick', field, value);
+				};
 			}
 		}
 	}

@@ -9,8 +9,8 @@
     <div class="panel-main-height panel-scroll action-required-list">
         <ul class="media-list">
             <li class="facet-item" ng-repeat="item in facets">
-                <div>
-                    <input type="checkbox"><span> {{item.fieldValue}} ({{item.count}})</span>
+                <div class="facet-detail">
+                    <input type="radio" ng-click="choose(facetTitle, item.fieldValue)"><span> {{item.fieldValue}} ({{item.count}})</span>
                 </div>
             </li>
         </ul>

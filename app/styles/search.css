@@ -25,3 +25,23 @@
 .panel-primary {
     margin-top: 10px;
 }
+
+.panel-main-top-height {
+    height: 175px;
+    overflow: hidden;
+}
+
+.panel-main-height {
+    height: 300px;
+    overflow: hidden;
+}
+
+.panel-aside-height {
+    height: 175px;
+    overflow: hidden;
+}
+
+.panel-scroll {
+    overflow: auto;
+}
+

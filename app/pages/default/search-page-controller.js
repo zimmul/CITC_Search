@@ -6,6 +6,7 @@
 
 	function SearchPageController($scope, searchResource, DTOptionsBuilder, DTColumnBuilder) {
 
+		var originalSearchResults = [];
 		$scope.searchTerm = null;
 
 		// "click" function of the search button on the UI
@@ -13,7 +14,10 @@
 
 			searchResource.query($scope.searchTerm).then(function(results) {
 				var resultsObj = results[0];
+
 				$scope.results = resultsObj.entries;
+				originalSearchResults = resultsObj.entries;
+
 				$scope.facets = buildFacetData(resultsObj.facetFields);
 			});
 
@@ -24,19 +28,11 @@
 			.withPaginationType('full_numbers')
 			.withDisplayLength(10)
 			.withBootstrap()
-			//.withOption('oLanguage', {
-			//	"sSearch": "Search",
-			//	"sShow": "Show",
-			//	"oPaginate": {
-			//		"sFirst": "First",
-			//		"sPrevious": "Previous",
-			//		"sNext": "Next",
-			//		"sLast": "Last"
-			//	},
-			//	"sInfo": "Showing" +" _START_ to _END_ of _TOTAL_ "+ "entries",
-			//	"sLengthMenu":"Show" +" _MENU_ " +"Items Per Page"
-			//})
 		;
+
+		$scope.$on('facetClick', function(event, field, value) {
+			filterResultsFromFacet(field, value);
+		});
 
 		var buildFacetData = function(sourceData) {
 
@@ -66,6 +62,22 @@
 			facets.push(facetArray);
 
 			return facets;
+		};
+
+		var filterResultsFromFacet = function(facetField, facetValue) {
+
+			var newResults = [];
+
+			var i= 0, j=originalSearchResults.length;
+			for(i; i < j; i++) {
+				var result = originalSearchResults[i];
+				var resultFacetField = result[facetField].toLowerCase();
+				if(resultFacetField.includes(facetValue.toLowerCase()) ) {
+					newResults.push(result);
+				}
+			}
+
+			$scope.results = newResults;
 		}
 	}
 
