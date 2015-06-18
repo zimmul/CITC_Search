@@ -7,6 +7,7 @@ body {
     background-color: #3498db;
     border:1px solid #eee;
     color:#fff;z-index:999;
+    margin-bottom: 20px;
 }
 
 .citc-banner h3 {
