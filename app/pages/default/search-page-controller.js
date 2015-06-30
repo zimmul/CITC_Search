@@ -2,12 +2,11 @@
 	'use strict';
 
 	angular.module('pages.search')
-		.controller('searchPageController', ['$scope', 'searchResource', 'DTOptionsBuilder', 'DTColumnBuilder', SearchPageController]);
+		.controller('searchPageController', ['$scope', 'searchResource', 'DTOptionsBuilder', 'selectedFacetService', SearchPageController]);
 
-	function SearchPageController($scope, searchResource, DTOptionsBuilder, DTColumnBuilder) {
+	function SearchPageController($scope, searchResource, DTOptionsBuilder, selectedFacetService) {
 
 		var originalSearchResults = [];
-		var currentFacet = null;
 		$scope.searchTerm = null;
 
 		// "click" function of the search button on the UI
@@ -31,8 +30,8 @@
 			.withBootstrap()
 		;
 
-		$scope.$on('facetClick', function(event, field, value) {
-			filterResultsFromFacet(field, value);
+		$scope.$on('facetClick', function(event) {
+			filterResultsFromFacet();
 		});
 
 		var buildFacetData = function(sourceData) {
@@ -73,37 +72,84 @@
 			return facets;
 		};
 
-		var filterResultsFromFacet = function(facetField, facetValue) {
-			var selectedFacet = facetField +'-' + facetValue;
-			if(currentFacet === selectedFacet) {
-				$scope.results = originalSearchResults;
-				currentFacet = null;
-				return;
-			}
+		var filterResultsFromFacet = function() {
 
+			var selectedFacets = selectedFacetService.getSelected();
 			var newResults = [];
 
-			var i= 0, j=originalSearchResults.length;
-			for(i; i < j; i++) {
-				var result = originalSearchResults[i];
+			if(selectedFacets.length > 0) {
+				// filter results
+				var j = originalSearchResults.length;
+				for (var i = 0; i < j; i++) {
+					var result = originalSearchResults[i];
 
-				if(facetField.toLowerCase() === 'pastdueamount') {
-					var resultFacetField = parseFloat(result[facetField]);
-					var minValue = parseInt(facetValue) - 99;
-					var maxValue = parseInt(facetValue);
-					if(minValue <= resultFacetField && resultFacetField <= maxValue) {
-						newResults.push(result);
-					}
-				} else {
-					var resultFacetField = result[facetField].toLowerCase();
-					if(resultFacetField.includes(facetValue.toLowerCase()) ) {
+					if (isResultMatchToFacets(selectedFacets, result) && !isItemInList(newResults, result)) {
 						newResults.push(result);
 					}
 				}
+			} else {
+				// no filters applied
+				newResults = originalSearchResults;
 			}
 
-			currentFacet = selectedFacet;
 			$scope.results = newResults;
+		};
+
+		var isResultMatchToFacets = function(selectedFacets, obj) {
+
+			var isMatch = false;
+
+			var j=selectedFacets.length;
+
+			for(var i = 0; i<j; i++) {
+				var facet = selectedFacets[i];
+				var searchResultValue = null;
+
+				if(obj.hasOwnProperty(facet.field)) {
+					if (facet.field.toLowerCase() === 'pastdueamount') {
+						searchResultValue = parseFloat(obj.value);
+						var minValue = parseInt(facet.value) - 99;
+						var maxValue = parseInt(facet.value);
+						if (minValue <= searchResultValue && searchResultValue <= maxValue) {
+							isMatch = true;
+						}
+					} else {
+						searchResultValue = obj[facet.field].toLowerCase();
+						if (searchResultValue.includes(facet.value.toLowerCase())) {
+							isMatch = true;
+						}
+					}
+				}
+
+			}
+
+			return isMatch;
+		};
+
+		var isItemInList = function(array, obj) {
+
+			var j = array.length;
+			for(var i=0; i<j; i++) {
+				var arrayObj = array[i];
+
+				if(isEquals(obj, arrayObj)) {
+					return true;
+				}
+			}
+
+			return false;
+		};
+
+		var isEquals = function(lhs, rhs) {
+
+			return lhs.id === rhs.id
+					&& lhs.accountId === rhs.accountId
+					&& lhs.accountNumber === rhs.accountNumber
+					&& lhs.firstName === rhs.firstName
+					&& lhs.lastName === rhs.lastName
+					&& lhs.city === rhs.city
+					&& lhs.state === rhs.state
+					&& lhs.zip === rhs.zip ;
 		}
 	}
 

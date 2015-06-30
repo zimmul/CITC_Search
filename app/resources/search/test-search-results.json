@@ -282,11 +282,11 @@
       "fieldName" : "marketingCampaign",
       "fieldValue" : "indigo"
     },
-    { "count" : 9,
+    { "count" : 99,
       "fieldName" : "Up To:[$99]",
       "fieldValue" : "pastDueAmount"
     },
-    { "count" : 1,
+    { "count" : 11,
       "fieldName" : "Up To:[$199]",
       "fieldValue" : "pastDueAmount"
     }
