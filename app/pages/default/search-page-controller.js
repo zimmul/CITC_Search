@@ -23,6 +23,7 @@
 
 		};
 
+		// options to build the results datatable
 		$scope.dtOptions = DTOptionsBuilder.newOptions()
 			.withDOM('<"row"<"col-xs-6"<"pull-left"i>><"col-xs-6"<"pull-right"l>>><"row"<"col-xs-12"<"table-responsive"rt>>><"row row-padding"<"col-xs-12"<"pull-right"p>>>')
 			.withPaginationType('full_numbers')
@@ -30,10 +31,12 @@
 			.withBootstrap()
 		;
 
+		// event listener for facet filtering
 		$scope.$on('facetClick', function(event) {
 			filterResultsFromFacet();
 		});
 
+		// function to build the array of filtering facet categories and items
 		var buildFacetData = function(sourceData) {
 
 			if(sourceData.length === 0) {
@@ -72,6 +75,7 @@
 			return facets;
 		};
 
+		// function to filter the search results based on chosen filter facet(s)
 		var filterResultsFromFacet = function() {
 
 			var selectedFacets = selectedFacetService.getSelected();
@@ -95,6 +99,7 @@
 			$scope.results = newResults;
 		};
 
+		// returns a boolean if the individual object fits within the array of filtering facets
 		var isResultMatchToFacets = function(selectedFacets, obj) {
 
 			var isMatch = false;
@@ -107,7 +112,7 @@
 
 				if(obj.hasOwnProperty(facet.field)) {
 					if (facet.field.toLowerCase() === 'pastdueamount') {
-						searchResultValue = parseFloat(obj.value);
+						searchResultValue = parseFloat(obj.pastDueAmount);
 						var minValue = parseInt(facet.value) - 99;
 						var maxValue = parseInt(facet.value);
 						if (minValue <= searchResultValue && searchResultValue <= maxValue) {
@@ -126,6 +131,7 @@
 			return isMatch;
 		};
 
+		// checks to see if an object is already in the array
 		var isItemInList = function(array, obj) {
 
 			var j = array.length;
@@ -140,6 +146,7 @@
 			return false;
 		};
 
+		// checks to see if two objects are equal based on specific field criteria
 		var isEquals = function(lhs, rhs) {
 
 			return lhs.id === rhs.id
