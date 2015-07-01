@@ -15,10 +15,14 @@
 			searchResource.query($scope.searchTerm).then(function(results) {
 				var resultsObj = results[0];
 
-				$scope.results = resultsObj.entries;
-				originalSearchResults = resultsObj.entries;
+				if(resultsObj.hasOwnProperty('count') && resultsObj.count > 0) {
+					$scope.results = resultsObj.entries;
+					originalSearchResults = resultsObj.entries;
 
-				$scope.facets = buildFacetData(resultsObj.facetFields);
+					$scope.facets = buildFacetData(resultsObj.facetFields);
+				} else {
+					$scope.results = [];
+				}
 			});
 
 		};
