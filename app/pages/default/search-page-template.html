@@ -44,12 +44,24 @@
                     <tr ng-repeat="result in results">
                         <td>
                             <a href="#">
-                                <div class="col-sm-3 field-label">Name:</div>
-                                <div class="col-sm-9 field">{{result.firstName}} {{result.lastName}}</div>
-                                <div class="col-sm-3 field-label">Account #:</div>
-                                <div class="col-sm-9 field">{{result.accountNum}}</div>
-                                <div class="col-sm-3 field-label">Account ID:</div>
-                                <div class="col-sm-9 field">{{result.accountId}}</div>
+                                <div class="row">
+                                    <div class="col-sm-2 field-label">Name:</div>
+                                    <div class="col-sm-4 field">{{result.firstName}} {{result.lastName}}</div>
+                                    <div class="col-sm-2 field-label">Address:</div>
+                                    <div class="col-sm-4 field">{{result.city}}, {{result.state}} {{result.zip}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2 field-label">Account #:</div>
+                                    <div class="col-sm-4 field">{{result.accountNum}}</div>
+                                    <div class="col-sm-2 field-label">Past Due $:</div>
+                                    <div class="col-sm-4 field">{{result.pastDueAmount}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-2 field-label">Client Code:</div>
+                                    <div class="col-sm-4 field">{{result.clientCode}}</div>
+                                    <div class="col-sm-2 field-label">Product Code:</div>
+                                    <div class="col-sm-4 field">{{result.productCode}}</div>
+                                </div>
                             </a>
                         </td>
                     </tr>
