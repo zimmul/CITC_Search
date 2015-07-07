@@ -10,6 +10,7 @@
 	 * @constructor
 	 */
 	function FacetController ($scope, selectedFacetService) {
+
 		$scope.facetTitle = $scope.facets[0].fieldName;
 
 		$scope.choose = function(event, field, value) {

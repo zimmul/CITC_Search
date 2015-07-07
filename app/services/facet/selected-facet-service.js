@@ -39,6 +39,10 @@
 				}
 			},
 
+			reset: function() {
+				selectedFacetArray.splice(0, selectedFacetArray.length);
+			},
+
 			getSelected: function() {
 				return selectedFacetArray;
 			}

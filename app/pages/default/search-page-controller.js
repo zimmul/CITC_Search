@@ -12,10 +12,12 @@
 		// "click" function of the search button on the UI
 		$scope.search = function() {
 
+			selectedFacetService.reset();
+
 			searchResource.query($scope.searchTerm).then(function(results) {
 				var resultsObj = results[0];
 
-				if(resultsObj.hasOwnProperty('count') && resultsObj.count > 0) {
+				if(resultsObj && resultsObj.hasOwnProperty('count') && resultsObj.count > 0) {
 					$scope.results = resultsObj.entries;
 					originalSearchResults = resultsObj.entries;
 
@@ -64,9 +66,10 @@
 					}
 
 					facetArray = [];
+					facetArray.push(obj);
 				} else {
 					if(obj.fieldValue !== 'data' && obj.fieldValue !== 'marketing_campaign') {
-						facetArray.push(sourceData[i]);
+						facetArray.push(obj);
 					}
 				}
 
