@@ -14,12 +14,11 @@
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/datatables/media/css/jquery.dataTables.css" />
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="styles/search.css" />
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:css({.tmp,app}) styles/application.css -->
-    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="styles/search.css" />
     <!-- endbuild -->
 </head>
 <body>
@@ -33,10 +32,12 @@
     <!-- In production use:
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
     -->
-    <!-- build:js app/vendor.js -->
+    <!-- build:js vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/datatables/media/js/jquery.dataTables.js"></script>
+    <script src="bower_components/angular-datatables/dist/angular-datatables.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-loader/angular-loader.js"></script>
@@ -44,16 +45,14 @@
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="bower_components/angularjs-camelCase-human/camelCaseToHuman.js"></script>
-    <script src="bower_components/datatables/media/js/jquery.dataTables.js"></script>
-    <script src="bower_components/angular-datatables/dist/angular-datatables.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
-    <!-- build:js({.tmp,app}) app/application.js -->
+    <!-- build:js({.tmp,app}) application.js -->
     <script src="app.js"></script>
 
-    <script src="directives/facet/facet-directive.js"></script>
+    <script src="directives/facet/facet-directive-module.js"></script>
     <script src="directives/facet/facet-directive-controller.js"></script>
 
     <script src="pages/default/search-page-module.js"></script>

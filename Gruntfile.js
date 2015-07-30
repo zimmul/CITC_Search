@@ -14,11 +14,11 @@ module.exports = function(grunt) {
 
         vars: {
             // configurable variables
-            src: 'src',
+            src: 'app',
             tmp: 'tmp',
             tmpdist: 'target-grunt',
             vendorFileName: 'vendor.js',
-            appName: 'searchApp',
+            appName: 'search',
             sourceFileName: '<%= vars.appName %>.js',
             dist: 'target/searchApp',
             archiveName: 'searchApp',
@@ -108,7 +108,7 @@ module.exports = function(grunt) {
         cssmin: {
             add_banner: {
                 options: {
-                    banner: '/* Polaris minified css file */'
+                    banner: '/* CITC minified css file */'
                 },
                 files: {
                     '<%= vars.dist %>/styles/application.css': ['<%= vars.tmp %>/styles/*.css']
@@ -164,6 +164,12 @@ module.exports = function(grunt) {
                     cwd: 'tmp/images',
                     dest: '<%= vars.dist %>/images',
                     src: ['generated/*']
+                }, {
+                    // App HTML templates
+                    expand: true,
+                    cwd: './app',
+                    dest: '<%= vars.dist %>',
+                    src: grunt.file.expand(FilePatterns.html)
                 }]
             },
             dependencies: {
@@ -171,7 +177,14 @@ module.exports = function(grunt) {
                     expand: true,
                     flatten: true,
                     src: ['.tmp/concat/scripts/vendor.js'],
-                    dest: '<%= vars.dist %>/app',
+                    dest: '<%= vars.dist %>',
+                    filter: 'isFile'
+                },{
+                    // App fonts
+                    expand: true,
+                    flatten: true,
+                    src: grunt.file.expand(FilePatterns.fonts),
+                    dest: '<%= vars.dist %>/fonts',
                     filter: 'isFile'
                 }]
             },
@@ -191,11 +204,11 @@ module.exports = function(grunt) {
             },
             js: {
                 src: grunt.file.expand(FilePatterns.javascript.concat),
-                dest: '<%= vars.dist %>/app/application.js'
+                dest: '<%= vars.dist %>/application.js'
             },
             depJs: {
                 src: grunt.file.expand(FilePatterns.javascript.concatDeps),
-                dest: '<%= vars.dist %>/app/<%= vars.vendorFileName %>'
+                dest: '<%= vars.dist %>/<%= vars.vendorFileName %>'
             },
             depCss: {
                 src: grunt.file.expand(FilePatterns.javascript.concatDepsCSS),
