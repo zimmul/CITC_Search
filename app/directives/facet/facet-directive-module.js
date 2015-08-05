@@ -8,7 +8,7 @@
 
 		return {
 			restrict: 'E',
-			templateUrl: 'directives/facet/facet-template.html',
+			templateUrl: 'app/directives/facet/facet-template.html',
 			scope: {
 				facets: '=facetItems'
 			},

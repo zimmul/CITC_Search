@@ -10,4 +10,4 @@ angular.module('searchApp', [
 	.config(['$routeProvider', function($routeProvider) {
 		$routeProvider.otherwise({redirectTo: '/search'});
 }])
-	.constant('searchUrl', 'resources/search/test-search-results.json');
+	.constant('searchUrl', '/search');

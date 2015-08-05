@@ -34,8 +34,7 @@ var FilePatterns = {
 	],
 
 	sourceHtml: [
-		'app/**/*.html',
-		'!app/index*.html'
+		'app/**/*.html'
 	]
 
 };

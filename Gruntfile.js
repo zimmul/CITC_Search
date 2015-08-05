@@ -148,15 +148,10 @@ module.exports = function(grunt) {
                     // Application source that will not be concatenated and/or minified
                     expand: true,
                     dot: true,
-                    cwd: '<%= vars.src %>',
+                    cwd: '.',
                     dest: '<%= vars.dist %>',
                     src: [
-                        '*.{ico,png,txt}',
-                        '*.html',
-                        'images/{,*/}*',
-                        'app/{,**/}*.html',
-                        'fonts/*',
-                        'styles/images/*'
+                        '*.html'
                     ]
                 }, {
                     // App images
@@ -167,7 +162,7 @@ module.exports = function(grunt) {
                 }, {
                     // App HTML templates
                     expand: true,
-                    cwd: './app',
+                    cwd: './',
                     dest: '<%= vars.dist %>',
                     src: grunt.file.expand(FilePatterns.html)
                 }]
@@ -204,11 +199,11 @@ module.exports = function(grunt) {
             },
             js: {
                 src: grunt.file.expand(FilePatterns.javascript.concat),
-                dest: '<%= vars.dist %>/application.js'
+                dest: '<%= vars.dist %>/app/application.js'
             },
             depJs: {
                 src: grunt.file.expand(FilePatterns.javascript.concatDeps),
-                dest: '<%= vars.dist %>/<%= vars.vendorFileName %>'
+                dest: '<%= vars.dist %>/app/<%= vars.vendorFileName %>'
             },
             depCss: {
                 src: grunt.file.expand(FilePatterns.javascript.concatDepsCSS),
